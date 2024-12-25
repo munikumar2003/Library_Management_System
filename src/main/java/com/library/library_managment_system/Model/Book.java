@@ -1,6 +1,17 @@
 package com.library.library_managment_system.Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class Book {
+    @Id
     private final String isbn;
     private final String title;
     private final String author;
