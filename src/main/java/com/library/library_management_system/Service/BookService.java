@@ -89,5 +89,16 @@ public class BookService {
         }
         return null; // or throw an exception if the book isn't found
     }
+
+    public boolean deleteBook(String id) {
+        // Find the book by its ID
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isPresent()) {
+            // Delete the book if found
+            bookRepository.deleteById(id);
+            return true; // Return true if book was successfully deleted
+        }
+        return false; // Return false if book wasn't found
+    }
 }
 
