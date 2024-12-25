@@ -17,7 +17,7 @@ class BookControllerTest {
         // Arrange
         BookService bookService = mock(BookService.class);
         BookController bookController = new BookController(bookService);
-        Book book = new Book("123-456-789", "The Great Gatsby", "F. Scott Fitzgerald", 1925, true);
+        Book book = new Book("123-456-789", "The Great Gatsby", "F. Scott Fitzgerald", 1925, true, false);
 
         when(bookService.addBook(book)).thenReturn(book);
 

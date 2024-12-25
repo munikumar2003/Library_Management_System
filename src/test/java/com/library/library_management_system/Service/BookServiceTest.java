@@ -14,7 +14,7 @@ class BookServiceTest {
         // Arrange
         BookRepository bookRepository = mock(BookRepository.class);
         BookService bookService = new BookService(bookRepository);
-        Book book = new Book("123-456-789", "The Great Gatsby", "F. Scott Fitzgerald", 1925, true);
+        Book book = new Book("123-456-789", "The Great Gatsby", "F. Scott Fitzgerald", 1925, true, false);
 
         when(bookRepository.existsById(book.getIsbn())).thenReturn(false);
         when(bookRepository.save(book)).thenReturn(book);

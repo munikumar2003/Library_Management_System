@@ -3,17 +3,65 @@ package com.library.library_management_system.Service;
 
 import com.library.library_management_system.Model.Book;
 import com.library.library_management_system.Repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
-    private final BookRepository bookRepository;
+    //private final BookRepository bookRepository;
+
+
+    @Autowired
+    private BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
+    // View all available books
+    public List<Book> viewAvailableBooks() {
+        return bookRepository.findIsBorrowed(false);
+    }
+
+    // Borrow a book
+    public String borrowBook(String bookId) {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
+
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+            if (!book.isBorrowed()) {
+                book.setBorrowed(true);
+                bookRepository.save(book);
+                return "You have successfully borrowed the book: " + book.getTitle();
+            } else {
+                return "Sorry, this book is already borrowed.";
+            }
+        } else {
+            return "Book not found!";
+        }
+    }
+
+    // Return a book
+    public String returnBook(String bookId) {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
+
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+            if (book.isBorrowed()) {
+                book.setBorrowed(false);
+                bookRepository.save(book);
+                return "You have successfully returned the book: " + book.getTitle();
+            } else {
+                return "This book was not borrowed.";
+            }
+        } else {
+            return "Book not found!";
+        }
+    }
     public Book addBook(Book book) {
         if (bookRepository.existsById(book.getIsbn())) {
             throw new IllegalArgumentException("Book with this ISBN already exists!");
