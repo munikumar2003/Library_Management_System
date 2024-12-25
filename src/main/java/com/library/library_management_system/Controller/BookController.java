@@ -1,5 +1,6 @@
 package com.library.library_management_system.Controller;
 
+import com.library.library_management_system.Exception.InvalidRequestException;
 import com.library.library_management_system.Model.Book;
 import com.library.library_management_system.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,12 @@ public class BookController {
 
     @PostMapping("/add-book")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
+        if (book.getTitle() == null || book.getTitle().isEmpty()) {
+            throw new InvalidRequestException("Book title cannot be empty.");
+        }
+        if (book.getAuthor() == null || book.getAuthor().isEmpty()) {
+            throw new InvalidRequestException("Author name cannot be empty.");
+        }
         Book savedBook = bookService.addBook(book);
         return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
     }

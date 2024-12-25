@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, String> {
 
-    List<Book> findIsBorrowed(boolean isBorrowed);
+    List<Book> findByBorrowed(boolean isBorrowed);
 }
 

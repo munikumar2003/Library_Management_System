@@ -24,7 +24,7 @@ public class BookService {
 
     // View all available books
     public List<Book> viewAvailableBooks() {
-        return bookRepository.findIsBorrowed(false);
+        return bookRepository.findByBorrowed(false);
     }
 
     // Borrow a book
@@ -35,6 +35,7 @@ public class BookService {
             Book book = optionalBook.get();
             if (!book.isBorrowed()) {
                 book.setBorrowed(true);
+                book.setAvailable(false);
                 bookRepository.save(book);
                 return "You have successfully borrowed the book: " + book.getTitle();
             } else {
@@ -53,6 +54,7 @@ public class BookService {
             Book book = optionalBook.get();
             if (book.isBorrowed()) {
                 book.setBorrowed(false);
+                book.setAvailable(true);
                 bookRepository.save(book);
                 return "You have successfully returned the book: " + book.getTitle();
             } else {

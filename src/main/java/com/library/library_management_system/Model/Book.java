@@ -8,54 +8,63 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-
 public class Book {
+
     @Id
     private String isbn;
     private String title;
     private String author;
     private int publicationYear;
     private boolean available = true;
-    private boolean isBorrowed = false;
+    private boolean borrowed;
 
-    //no arguments constructor
-    public Book(){
-
-    }
-
-    //all-arguments constructor
-    public Book(String title, String author, String isbn,int publicationYear, boolean available, boolean isBorrowed) {
+    public Book(String isbn, String title, String author, int publicationYear,
+                boolean available, boolean isBorrowed) {
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
-        this.publicationYear=publicationYear;
+        this.publicationYear = publicationYear;
         this.available = available;
-        this.isBorrowed=isBorrowed;
+        this.borrowed = isBorrowed;
     }
 
-
-    //getter for isbn
     public String getIsbn() {
         return isbn;
     }
 
-    //getter for title
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    // Getter and Setter for title
     public String getTitle() {
         return title;
     }
 
-    //getter for author
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    // Getter and Setter for author
     public String getAuthor() {
         return author;
     }
 
-    //getter for publication year
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    // Getter and Setter for publicationYear
     public int getPublicationYear() {
         return publicationYear;
     }
 
-    //getter and setter for availability
-    public boolean available() {
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    // Getter and Setter for available
+    public boolean isAvailable() {
         return available;
     }
 
@@ -63,18 +72,22 @@ public class Book {
         this.available = available;
     }
 
-    //getter and setter for isBorrowed
+    // Getter and Setter for isBorrowed
     public boolean isBorrowed() {
-        return isBorrowed;
+        return borrowed;
     }
 
     public void setBorrowed(boolean borrowed) {
-        isBorrowed = borrowed;
+        this.borrowed = borrowed;
     }
+
+    public Book(){
+
+    }
+
     @Override
     public String toString() {
         return String.format("Book[ISBN=%s, Title=%s, Author=%s, Year=%d, Available=%s, Borrowed=%s]",
-                isbn, title, author, publicationYear, available, isBorrowed);
+                isbn, title, author, publicationYear, available, borrowed);
     }
 }
-
