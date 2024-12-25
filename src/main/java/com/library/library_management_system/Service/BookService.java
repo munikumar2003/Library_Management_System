@@ -1,8 +1,8 @@
-package com.library.library_managment_system.Service;
+package com.library.library_management_system.Service;
 
 
-import com.library.library_managment_system.Model.Book;
-import com.library.library_managment_system.Repository.BookRepository;
+import com.library.library_management_system.Model.Book;
+import com.library.library_management_system.Repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 @Service

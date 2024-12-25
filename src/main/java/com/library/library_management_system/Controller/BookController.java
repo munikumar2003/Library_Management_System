@@ -1,7 +1,7 @@
-package com.library.library_managment_system.Controller;
+package com.library.library_management_system.Controller;
 
-import com.library.library_managment_system.Model.Book;
-import com.library.library_managment_system.Service.BookService;
+import com.library.library_management_system.Model.Book;
+import com.library.library_management_system.Service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

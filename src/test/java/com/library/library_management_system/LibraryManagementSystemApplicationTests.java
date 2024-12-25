@@ -1,10 +1,10 @@
-package com.library.library_managment_system;
+package com.library.library_management_system;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LibraryManagmentSystemApplicationTests {
+class LibraryManagementSystemApplicationTests {
 
 	@Test
 	void contextLoads() {
