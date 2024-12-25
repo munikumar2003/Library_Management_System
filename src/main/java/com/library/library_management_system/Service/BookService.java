@@ -66,6 +66,9 @@ public class BookService {
         }
     }
     public Book addBook(Book book) {
+        if (book == null) {
+            throw new RuntimeException("Book cannot be null");
+        }
         if (bookRepository.existsById(book.getIsbn())) {
             throw new IllegalArgumentException("Book with this ISBN already exists!");
         }
