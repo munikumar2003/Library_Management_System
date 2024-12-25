@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Year;
+
 @Entity
 @Data
 public class Book {
@@ -14,11 +16,11 @@ public class Book {
     private String isbn;
     private String title;
     private String author;
-    private int publicationYear;
+    private Year publicationYear;
     private boolean available = true;
     private boolean borrowed;
 
-    public Book(String isbn, String title, String author, int publicationYear,
+    public Book(String isbn, String title, String author, Year publicationYear,
                 boolean available, boolean isBorrowed) {
         this.isbn = isbn;
         this.title = title;
@@ -55,11 +57,11 @@ public class Book {
     }
 
     // Getter and Setter for publicationYear
-    public int getPublicationYear() {
+    public Year getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(int publicationYear) {
+    public void setPublicationYear(Year publicationYear) {
         this.publicationYear = publicationYear;
     }
 
