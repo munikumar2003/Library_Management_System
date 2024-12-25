@@ -54,5 +54,14 @@ public class BookController {
         Book savedBook = bookService.addBook(book);
         return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
     }
+
+    @PutMapping("/update-book/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable String id, @RequestBody Book bookDetails) {
+        Book updatedBook = bookService.updateBook(id, bookDetails);
+        if (updatedBook != null) {
+            return ResponseEntity.ok(updatedBook); // Return updated book with status 200
+        }
+        return ResponseEntity.notFound().build(); // Return 404 if book is not found
+    }
 }
 

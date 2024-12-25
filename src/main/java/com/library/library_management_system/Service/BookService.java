@@ -70,5 +70,24 @@ public class BookService {
         }
         return bookRepository.save(book);
     }
+
+    public Book updateBook(String id, Book bookDetails) {
+        // Find the existing book by id
+        Optional<Book> existingBook = bookRepository.findById(id);
+        if (existingBook.isPresent()) {
+            Book bookToUpdate = existingBook.get();
+
+            // Update the book's details
+            bookToUpdate.setTitle(bookDetails.getTitle());
+            bookToUpdate.setAuthor(bookDetails.getAuthor());
+            bookToUpdate.setPublicationYear(bookDetails.getPublicationYear());
+            bookToUpdate.setAvailable(bookDetails.isAvailable());
+            bookToUpdate.setBorrowed(bookDetails.isBorrowed());
+
+            // Save the updated book
+            return bookRepository.save(bookToUpdate);
+        }
+        return null; // or throw an exception if the book isn't found
+    }
 }
 
