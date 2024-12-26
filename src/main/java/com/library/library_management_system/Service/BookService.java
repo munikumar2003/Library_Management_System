@@ -1,6 +1,7 @@
 package com.library.library_management_system.Service;
 
 
+import com.library.library_management_system.Exception.ResourceNotFoundException;
 import com.library.library_management_system.Model.Book;
 import com.library.library_management_system.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +92,7 @@ public class BookService {
             // Save the updated book
             return bookRepository.save(bookToUpdate);
         }
-        return null; // or throw an exception if the book isn't found
+        throw new ResourceNotFoundException("Book not found with id: " + id); // or throw an exception if the book isn't found
     }
 
     public boolean deleteBook(String id) {

@@ -1,6 +1,8 @@
 package com.library.library_management_system.Controller;
 
+import com.library.library_management_system.Exception.ApiResponse;
 import com.library.library_management_system.Exception.InvalidRequestException;
+import com.library.library_management_system.Exception.ResourceNotFoundException;
 import com.library.library_management_system.Model.Book;
 import com.library.library_management_system.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +67,23 @@ public class BookController {
     }
 
     @DeleteMapping("/delete-book/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable String id) {
-        boolean isDeleted = bookService.deleteBook(id);
-        if (isDeleted) {
-            return ResponseEntity.noContent().build(); // Return 204 No Content if book is deleted
+    public ResponseEntity<ApiResponse> deleteBook(@PathVariable String id) {
+        try {
+            boolean isDeleted = bookService.deleteBook(id);
+            if (isDeleted) {
+                // Return a success message if the book is deleted
+                return ResponseEntity.ok(new ApiResponse("Book deleted successfully.", HttpStatus.OK.value()));
+            } else {
+                // This branch may not be needed if you use exceptions for not found
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ApiResponse("Book not found.", HttpStatus.NOT_FOUND.value()));
+            }
+        } catch (ResourceNotFoundException ex) {
+            // Handle the exception and return a meaningful response
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value()));
         }
-        return ResponseEntity.notFound().build(); // Return 404 if book not found
     }
+
 }
 
